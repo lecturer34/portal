@@ -1,0 +1,21 @@
+Laravel Authentication
+	laravel ui
+		this is for the UI
+			composer require laravel/ui
+			(github.com/laravel/ui)
+			php artisan ui bootstrap --auth
+			npm install and npm run dev
+	laravel fortify
+		this is for the backend
+			composer require laravel/fortify
+			(github.com/laravel/fortify)
+
+			Next publish fortify's resources:
+				php artisan...
+			php artisan migrate			
+			\App\Providers\FortifyServiceProvider
+			(Add the fortify service provider in app.php)
+	
+				
+
+			
