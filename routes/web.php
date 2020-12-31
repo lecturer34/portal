@@ -5,7 +5,7 @@ use App\Http\Controllers\SchoolController;
 
 
 Route::get('/', function(){
-    return "Home menu";
+    return "Home page";
 });
 
 Route::get('schools', [SchoolController::class, 'index'])->name('school.list');
