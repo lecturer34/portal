@@ -16,6 +16,10 @@ Laravel Authentication
 			\App\Providers\FortifyServiceProvider
 			(Add the fortify service provider in app.php)
 	
-				
 
-			
+
+
+				
+Git Username: jolawal
+Git Email: ju3lawal@gmail.com
+Git Password: ozi123@abu		
