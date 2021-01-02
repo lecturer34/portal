@@ -13,12 +13,11 @@
     </dl>
 
     <div class="d-flex">
-        <a href="{{route('schools.edit', $school->id)}}" class="btn btn-primary m-1">Edit</a>
-
         <form action="{{ route('schools.destroy', $school->id) }}" method="POST">
-            <input type="hidden" name="_method" value="DELETE">
+            {{ method_field('DELETE') }}
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <button class="btn btn-danger m-1">Delete</button>
+            <a href="{{ route('university.schools')  }}" class = "btn">Cancel</a>
         </form>
     </div>
 @endsection

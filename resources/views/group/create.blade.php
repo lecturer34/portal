@@ -5,6 +5,11 @@
     <form method = "post" action="{{route('groups.store')}}">
         @csrf()
         <div class="mb-3">
+            <label for="label" class="form-label">Group Label</label>
+            <input type="text" class="form-control" value = "G{{$label}}" disabled="disabled">
+            <input type="hidden" name = "label" class="form-control" value = "{{$label}}">
+        </div>
+        <div class="mb-3">
             <label for="size" class="form-label">Group Size</label>
             <input type="text" name = "size" class="form-control">
         </div>

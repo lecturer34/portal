@@ -17,7 +17,7 @@
 
     <div class="d-flex">
         <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
-            <input type="hidden" name="_method" value="DELETE">
+            {{ method_field('DELETE') }}
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <button class="btn btn-danger m-1">Delete</button>
             <a href="{{route('department.courses', session('department_id'))}}" class = "btn">Cancel</a>

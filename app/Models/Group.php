@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    protected $fillable = ['size', 'course_id'];
+    protected $fillable = ['size', 'label', 'course_id'];
     use HasFactory;
 
     public function course()

@@ -28,28 +28,29 @@ class DepartmentController extends Controller
             "description"=>$request->description,
             "school_id"=> $school_id
         ]);
-        return redirect()->route("school.departments", $school_id);
+        return redirect()->route('school.departments', $school_id);
     }
 
-    public function edit($id)
+    public function edit(Department $department)
     {
-        $department = Department::findOrFail($id);
         return view('department.edit', compact('department'));
     }
 
-    public function show($id)
+    public function show(Department $department)
     {
-        $department = Department::findOrFail($id);
         return view('department.show', compact('department'));
     }
 
-    public function update(Request $request){
-        return true;
+    public function update(Request $request, Department $department){
+        $department->name = $request->name;
+        $department->description = $request->description;
+        $department->save();
+        return redirect()->route('school.departments', session('school_id'));
     }
 
-    public function destroy($id)
+    public function destroy(Department $department)
     {
-        Department::destroy($id);
+        $department->delete();
         return redirect()->route("school.departments", session('school_id'));
     }
 

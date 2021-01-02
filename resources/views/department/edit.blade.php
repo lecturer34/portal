@@ -2,8 +2,9 @@
 @section("content")
     <h1>Edit Department</h1>
     <hr>
-    <form method = "patch" action="{{route('departments.update', $department->id)}}">
+    <form method = "POST" action="{{route('departments.update', $department->id)}}">
         @csrf()
+        {{ method_field('PATCH') }}
         <input type="hidden" name="id" value = "{{$department->id}}">
         <div class="mb-3">
             <label for="name" class="form-label">Department Name</label>

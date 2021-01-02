@@ -20,7 +20,7 @@
                 <td>{{ $loop->index + 1  }}</td>
                 <td>
                     <a>
-                        G{{ $group->id }}
+                        G{{ $group->label }}
                     </a>
                 </td>
                 <td>{{ $group->size }}</td>

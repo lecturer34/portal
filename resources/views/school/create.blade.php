@@ -15,7 +15,7 @@
 
         <div class="mb-3">
             <button type = "submit" class = "btn btn-primary">Save</button>
-            <a href="{{route("schools.index")}}" class="btn btn-warning">Cancel</a>
+            <a href="{{route("schools.index")}}" class="btn">Cancel</a>
         </div>
     </form>
 @endsection

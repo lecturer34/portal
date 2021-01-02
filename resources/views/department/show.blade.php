@@ -16,7 +16,7 @@
         <a href="{{route('departments.edit', $department->id)}}" class="btn btn-primary m-1">Edit</a>
 
         <form action="{{ route('departments.destroy', $department->id) }}" method="POST">
-            <input type="hidden" name="_method" value="DELETE">
+            {{ method_field('DELETE') }}
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <button class="btn btn-danger m-1">Delete</button>
         </form>

@@ -28,20 +28,21 @@ class SchoolController extends Controller
         return redirect()->route("university.schools");
     }
 
-    public function show($id)
+    public function show(School $school)
     {
-        $school = School::findOrFail($id);
         return view('school.show', compact('school','school'));
     }
 
-    public function edit($id)
+    public function edit(School $school)
     {
-        $school = School::find($id);
-        return view('school.edit', compact('school'));
+        return view('school.edit', compact('school','school'));
     }
 
-    public function update($id){
-        return false;
+    public function update(Request $request, School $school){
+        $school->name = $request->name;
+        $school->description = $request->description;
+        $school->save();
+        return redirect()->route("university.schools");
     }
 
     public function destroy($id)

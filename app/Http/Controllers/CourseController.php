@@ -35,25 +35,27 @@ class CourseController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Course $course)
     {
-        $course = Course::findOrFail($id);
         return view('course.edit', compact('course'));
     }
 
-    public function show($id)
+    public function show(Course $course)
     {
-        $course = Course::findOrFail($id);
         return view('course.show', compact('course'));
     }
 
-    public function update(Request $request){
-        return true;
+    public function update(Request $request, Course $course){
+        $course->code = $request->code;
+        $course->title = $request->title;
+        $course->creditunit = $request->creditunit;
+        $course->save();
+        return redirect()->route("department.courses", session('department_id'));
     }
 
-    public function destroy($id)
+    public function destroy(Course $course)
     {
-        Course::destroy($id);
+        $course->delete();
         return redirect()->route("department.courses", session('department_id'));
     }
 }

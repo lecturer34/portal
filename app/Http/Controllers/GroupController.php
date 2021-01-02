@@ -17,8 +17,16 @@ class GroupController extends Controller
 
     public function create()
     {
+        $last_added =  Group::where('course_id', session('course_id'))
+            ->orderBy('label', 'DESC')->get()->first();
 
-        return view('group.create');
+        $label = 1;
+
+        if ( $last_added != null  )
+            $label = $last_added->label + 1;
+
+
+        return view('group.create', compact('label'));
     }
 
     public function store(Request $request)
@@ -26,6 +34,7 @@ class GroupController extends Controller
         $course_id = session('course_id');
         $group = Group::create([
             "size"=>$request->size,
+            "label"=>$request->label,
             "course_id"=>$course_id
         ]);
         return redirect()->route('course.groups', $course_id);

@@ -2,8 +2,9 @@
 @section("content")
     <h1>Edit Course</h1>
     <hr>
-    <form method = "patch" action="{{route('courses.update', $course->id)}}">
+    <form method = "post" action="{{route('courses.update', $course->id)}}">
         @csrf()
+        {{ method_field('PATCH') }}
         <input type="hidden" name="id" value = "{{$course->id}}">
         <div class="mb-3">
             <label for="name" class="form-label">Course Code</label>
