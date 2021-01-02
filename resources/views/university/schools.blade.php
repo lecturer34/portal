@@ -1,9 +1,8 @@
 @extends("layouts.master")
 @section("content")
-    <h1>List</h1>
+    {{ Breadcrumbs::render('university') }}
     <hr>
-    <br>
-    <a href="{{route("school.create")}}" class="btn btn-primary">Create</a>
+    <a href="{{route("schools.create")}}" class = "btn btn-primary">Create</a>
     <br><br>
     <table class = "table table-bordered">
         <tr>
@@ -16,14 +15,15 @@
         @foreach($schools as $school )
             <tr>
                 <td>{{ $loop->index + 1  }}</td>
-                <td>{{ $school->name }}</td>
+                <td>
+                    <a href="{{route('school.departments', $school)}}">{{ $school->name }}</a>
+                </td>
                 <td>{{ $school->description }}</td>
                 <td>
-                    <a href="{{ route("school.edit", $school->id)  }}">Edit</a>
+                    <a href="{{ route("schools.edit", $school->id)  }}">Edit</a>
                     |
-                    <a href="{{ route("school.delete", $school->id)  }}">Delete</a>
+                    <a href="{{ route("schools.destroy", $school->id)  }}">Delete</a>
                 </td>
             </tr>
         @endforeach
-    </table>
-@endsection
+@endsection()

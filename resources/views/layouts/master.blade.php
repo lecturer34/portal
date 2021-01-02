@@ -13,6 +13,7 @@
 <body>
 
 {{--@include("layouts.navbar");--}}
+{{--{{ Breadcrumbs::render('department', $department) }}--}}
 <main class="container">
 
     @yield('content')

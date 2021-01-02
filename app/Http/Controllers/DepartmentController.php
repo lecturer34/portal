@@ -5,57 +5,52 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DepartmentValidation;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use App\Models\School;
 
 class DepartmentController extends Controller
 {
-    public function index()
+    public function index(School $school)
     {
-        $departments = Department::all();
-        return view('departments.list', compact('departments'));
+        $departments = Department::where('school_id', $school->id)->get();
+        return view('school.departments', compact('departments', 'school'));
     }
 
     public function create()
     {
-        return view('departments.create');
+        return view('department.create');
     }
 
-    public function store(DepartmentValidation $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
-        $name = $request->name; $code = $request->code;
-        $department = new Department();
-        $department->name = $name;
-        $department->code = $code;
-        $department->save();
-        session()->flash('success', 'Department  was added successfully!');
-        return redirect()->route("department.list");
+        $school_id = session("school_id");
+        Department::create([
+            "name"=>$request->name,
+            "description"=>$request->description,
+            "school_id"=> $school_id
+        ]);
+        return redirect()->route("school.departments", $school_id);
     }
 
     public function edit($id)
     {
-        $department = Department::find($id);
-        return view('departments.edit', compact('department'));
+        $department = Department::findOrFail($id);
+        return view('department.edit', compact('department'));
     }
 
-    public function update(DepartmentValidation $request){
-        $validated = $request->validated();
-        $department = Department::find($request->id);
-        $department->name = $request->name;
-        $department->code = $request->code;
-        $department->save();
-        session()->flash('success', 'Department has been updated successfully!');
-        return redirect()->route("department.list");
-    }
-
-    public function delete($id)
+    public function show($id)
     {
-        $department = Department::find($id);
-        return view('departments.delete', compact('department'));
+        $department = Department::findOrFail($id);
+        return view('department.show', compact('department'));
     }
 
-    public function destroy(Request $request){
-        department::destroy($request->id);
-        return redirect()->route("department.list");
+    public function update(Request $request){
+        return true;
+    }
+
+    public function destroy($id)
+    {
+        Department::destroy($id);
+        return redirect()->route("school.departments", session('school_id'));
     }
 
 }

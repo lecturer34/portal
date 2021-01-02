@@ -2,7 +2,7 @@
 @section("content")
     <h1>Create</h1>
     <hr>
-    <form method = "post" action="{{route('school.store')}}">
+    <form method = "post" action="{{route('schools.store')}}">
         @csrf()
         <div class="mb-3">
             <label for="name" class="form-label">School Name</label>
@@ -15,6 +15,7 @@
 
         <div class="mb-3">
             <button type = "submit" class = "btn btn-primary">Save</button>
+            <a href="{{route("schools.index")}}" class="btn btn-warning">Cancel</a>
         </div>
     </form>
 @endsection

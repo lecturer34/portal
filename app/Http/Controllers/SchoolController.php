@@ -10,7 +10,7 @@ class SchoolController extends Controller
     public function index()
     {
         $schools = School::all();
-        return view('school.list', compact('schools'));
+        return view('university.schools', compact('schools'));
     }
 
     public function create()
@@ -20,15 +20,18 @@ class SchoolController extends Controller
 
     public function store(Request $request)
     {
-        $name = $request->name; $description = $request->description;
-        $school = new School();
+        School::create([
+            "name"=>$request->name,
+            "description"=>$request->description,
+        ]);
 
-        $school->name = $name;
-        $school->description = $description;
+        return redirect()->route("university.schools");
+    }
 
-        $school->save();
-
-        return redirect()->route("school.list");
+    public function show($id)
+    {
+        $school = School::findOrFail($id);
+        return view('school.show', compact('school','school'));
     }
 
     public function edit($id)
@@ -37,23 +40,14 @@ class SchoolController extends Controller
         return view('school.edit', compact('school'));
     }
 
-    public function update(Request $request){
-        $school = School::find($request->id);
-        $school->name = $request->name;
-        $school->description = $request->description;
-        $school->save();
-        return redirect()->route("school.list");
+    public function update($id){
+        return false;
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
-        $school = School::find($id);
-        return view('school.delete', compact('school'));
-    }
-
-    public function destroy(Request $request){
-        School::destroy($request->id);
-        return redirect()->route("school.list");
+        School::destroy($id);
+        return redirect()->route("university.schools");
     }
 
 
