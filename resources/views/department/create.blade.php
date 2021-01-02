@@ -6,11 +6,21 @@
         @csrf()
         <div class="mb-3">
             <label for="name" class="form-label">Department Name</label>
-            <input type="text" name = "name" class="form-control" required>
+            <input type="text" name = "name" class="form-control" value = "{{ old("name")  }}">
+            @error("name")
+                <div class = "alert alert-danger">
+                    {{  $errors->first("name") }}
+                </div>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="code" class="form-label">Department Description</label>
-            <input type="text" name = "description" class="form-control" required>
+            <textarea class="form-control" name="description" rows="3">{{old("description")}}</textarea>
+            @error("description")
+                <div class = "alert alert-danger">
+                    {{  $errors->first("description") }}
+                </div>
+            @enderror
         </div>
 
         <div class="mb-3">

@@ -8,6 +8,13 @@ use App\Models\Course;
 
 class GroupController extends Controller
 {
+    private function validate_($request){
+
+        $this->validate($request, [
+            "size"=>"required|integer"
+        ]);
+
+    }
 
     public function index(Course $course)
     {
@@ -17,6 +24,7 @@ class GroupController extends Controller
 
     public function create()
     {
+
         $last_added =  Group::where('course_id', session('course_id'))
             ->orderBy('label', 'DESC')->get()->first();
 
@@ -31,6 +39,7 @@ class GroupController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate_($request);
         $course_id = session('course_id');
         $group = Group::create([
             "size"=>$request->size,
@@ -54,6 +63,7 @@ class GroupController extends Controller
 
     public function update(Request $request, Group $group)
     {
+        $this->validate_($request);
         $group->size = $request->size;
         $group->save();
         return redirect()->route("course.groups", session('course_id'));

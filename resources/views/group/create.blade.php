@@ -11,7 +11,12 @@
         </div>
         <div class="mb-3">
             <label for="size" class="form-label">Group Size</label>
-            <input type="text" name = "size" class="form-control">
+            <input type="text" name = "size" class="form-control" value = "{{old("size")}}">
+            @error("size")
+                <div class = "alert alert-danger">
+                    {{ $errors->first("size")  }}
+                </div>
+            @enderror
         </div>
         <div class="mb-3">
             <button type = "submit" class = "btn btn-primary">Save</button>

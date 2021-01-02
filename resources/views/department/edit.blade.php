@@ -9,10 +9,20 @@
         <div class="mb-3">
             <label for="name" class="form-label">Department Name</label>
             <input type="text" name = "name" class="form-control" value = "{{ $department->name }}">
+            @error("name")
+                <div class = "alert alert-danger">
+                    {{  $errors->first("name") }}
+                </div>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="code" class="form-label">Department Description</label>
-            <input type="text" name ="description" class="form-control" value="{{$department->description}}">
+            <textarea class="form-control" name="description" rows="3">{{$department->description}}</textarea>
+            @error("description")
+                <div class = "alert alert-danger">
+                    {{  $errors->first("description") }}
+                </div>
+            @enderror
         </div>
 
         <div class="mb-3">

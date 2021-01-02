@@ -9,6 +9,15 @@ use App\Models\School;
 
 class DepartmentController extends Controller
 {
+    private function validate_($request){
+
+        $this->validate($request, [
+           "name"=>"required",
+           "description"=>"required"
+        ]);
+
+    }
+
     public function index(School $school)
     {
         $departments = Department::where('school_id', $school->id)->get();
@@ -22,12 +31,15 @@ class DepartmentController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate_($request);
+
         $school_id = session("school_id");
         Department::create([
             "name"=>$request->name,
             "description"=>$request->description,
             "school_id"=> $school_id
         ]);
+
         return redirect()->route('school.departments', $school_id);
     }
 
@@ -42,6 +54,8 @@ class DepartmentController extends Controller
     }
 
     public function update(Request $request, Department $department){
+        $this->validate_($request);
+
         $department->name = $request->name;
         $department->description = $request->description;
         $department->save();

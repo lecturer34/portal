@@ -7,6 +7,14 @@ use App\Models\School;
 
 class SchoolController extends Controller
 {
+    private function validate_($request){
+
+        $this->validate($request, [
+            "name"=>"required",
+            "description"=>"required"
+        ]);
+    }
+
     public function index()
     {
         $schools = School::all();
@@ -20,6 +28,8 @@ class SchoolController extends Controller
 
     public function store(Request $request)
     {
+
+        $this->validate_($request);
         School::create([
             "name"=>$request->name,
             "description"=>$request->description,
@@ -39,6 +49,9 @@ class SchoolController extends Controller
     }
 
     public function update(Request $request, School $school){
+
+        $this->validate_($request);
+
         $school->name = $request->name;
         $school->description = $request->description;
         $school->save();
@@ -50,6 +63,8 @@ class SchoolController extends Controller
         School::destroy($id);
         return redirect()->route("university.schools");
     }
+
+
 
 
 }
