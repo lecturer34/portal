@@ -20,4 +20,10 @@ Breadcrumbs::for('course', function($trail, $course){
     $trail->push( $breadcrumb_label, route('course.groups', $course->id) );
 });
 
+Breadcrumbs::for('group', function($trail, $group, $target_route){
+    $trail->parent('course', $group->course);
+    $breadcrumb_label = "Group ".$group->label;
+    $trail->push($breadcrumb_label, route($target_route, $group->id));
+});
+
 

@@ -19,9 +19,16 @@
             <tr>
                 <td>{{ $loop->index + 1  }}</td>
                 <td>
-                    <a>
-                        G{{ $group->label }}
+                    G{{ $group->label }}
+                    (<a href="{{ route("group.schedules", $group->label) }}">
+                        manage schedules
                     </a>
+                    |
+                    <a href="{{  route("group.lecturers", $group->label) }}">
+                        manage lecturers
+                    </a>)
+
+
                 </td>
                 <td>{{ $group->size }}</td>
                 <td>
