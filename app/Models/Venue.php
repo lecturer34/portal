@@ -9,6 +9,7 @@ class Venue extends Model
 {
     use HasFactory;
 
+
     protected $fillable = ['school_id', 'department_id', 'capacity','type','status', 'has_multimedia'];
 
     public function getschoolschool (){
@@ -18,4 +19,5 @@ class Venue extends Model
     public function getdepartmentname (){
         return $this->belongsTo('App\Models\Department', 'department_id');
     }
+
 }
