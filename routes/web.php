@@ -28,6 +28,8 @@ Route::get('group/{group}/lecturer', [GroupLecturerController::class, 'index'])-
 Route::resource('schedules', ScheduleController::class);
 
 Route::post('group/{group}/lecturer/create', [GroupLecturerController::class, 'store'])->name('group.lecturers.create');
+Route::post('group/{group}/lecturer/delete', [GroupLecturerController::class, 'destroy'])->name('group.lecturer.delete');
+
 
 Auth::routes();
 

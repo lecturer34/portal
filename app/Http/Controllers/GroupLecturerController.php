@@ -38,48 +38,8 @@ class GroupLecturerController extends Controller
         return $this->getGroupLecturers($group->id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Lecturer  $lecturer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Lecturer $lecturer)
+    public function destroy(Group $group, Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Lecturer  $lecturer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Lecturer $lecturer)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Lecturer  $lecturer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Lecturer $lecturer)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Lecturer  $lecturer
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Lecturer $lecturer)
-    {
-        //
+        $group->lecturers()->detach(intval($request->lecturer));
     }
 }

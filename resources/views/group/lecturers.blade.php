@@ -9,29 +9,35 @@
         session(['group_id' => $group->id]);
     @endphp
     <br><br>
-    <table class = "table table-bordered">
-        <tr>
-            <th>S/N</th>
-            <th>First Name</th>
-            <th>Surname</th>
-            <th>Othernames</th>
-            <th></th>
-        </tr>
-        <tbody id = "lecturers-list">
-        @foreach($lecturers as $lecturer )
-            <tr>
-                <td>{{ $loop->index + 1  }}</td>
-                <td>{{ $lecturer->firstname }}</td>
-                <td>{{ $lecturer->surname }}</td>
-                <td>{{ $lecturer->othernames }}</td>
-                <td>
-                    <a href="">Delete</a>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
 
-    </table>
+
+
+
+    <div class="row" id="lecturers-list">
+        @foreach($lecturers as $lecturer )
+            <div class="col-md-3" id = "card{{$lecturer->id}}">
+                <div class="card mb-3 box-shadow">
+                    <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="https://www.oasdom.com/wp-content/uploads/2018/04/Oasdom-rich-kid-celebrity-in-Nigeria.jpg" data-holder-rendered="true">
+                    <div class="card-body">
+                        <h3>{{$lecturer->firstname}} {{$lecturer->surname}}</h3>
+                        <p class="card-text">Lecturer II</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-danger remove-lecturer" id = "{{$lecturer->id}}">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+
+
+    </div>
+
+
+
+
+
     @include("group_lecturer.create")
     <script>
         $(document).ready(function(){
@@ -87,45 +93,49 @@
                 }).done(function(data){
                     if (data != -1){
                         $("#add-lecturer").modal('hide');
-                        console.log(data);
-                        rows = "";
+                        cards = "";
                         $.each(data, function(idx, val){
-                            newrow = `<tr>
-                                            <td>${idx + 1}</td>
-                                            <td>${val.firstname}</td>
-                                            <td>${val.surname}</td>
-                                            <td>${val.othernames}</td>
-                                       </tr>`;
-                            rows = rows + newrow;
+                            newcard = `
+                                        <div class="col-md-3" id = "card${$("#lecturer").val()}">
+                                            <div class="card mb-3 box-shadow">
+                                                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="https://www.oasdom.com/wp-content/uploads/2018/04/Oasdom-rich-kid-celebrity-in-Nigeria.jpg" data-holder-rendered="true">
+                                                <div class="card-body">
+                                                    <h3>${val.firstname}&nbsp;${val.surname}</h3>
+                                                    <p class="card-text">Lecturer II</p>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-sm btn-outline-danger remove-lecturer" id = "${$("#lecturer").val()}">Remove</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            `;
+                            cards = cards + newcard;
                         });
-                        $("#lecturers-list").html(rows);
+                        $("#lecturers-list").html(cards);
                     }
 
                 });
             });
 
 
-                 {{--$(document).on("click", "#save-lecturer", function(){--}}
-                {{--$.ajax({--}}
-                    {{--url: "{{route("")}}",--}}
-                    {{--type: "POST",--}}
-                    {{--data: {--}}
+            $(document).on("click", ".remove-lecturer", function(){
+                card = "#card"+$(this).prop("id");
+                $.ajax({
+                    method: "POST",
+                    url: "/group/{{session('group_id')}}/lecturer/delete",
+                    data:{
+                        lecturer: $(this).prop("id"),
+                        _token: "{{csrf_token()}}"
+                    }
+                }).done(function(data){
+                    $(card).remove();
+                });
 
-                    {{--}--}}
-                {{--}).done(function(){--}}
+            });
 
-                {{--});--}}
-                {{--var row = `<tr>--}}
-                                {{--<td>#</td>--}}
-                                {{--<td>myname</td>--}}
-                                {{--<td>myname</td>--}}
-                                {{--<td>myname</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="">Delete</a>--}}
-                                {{--</td>--}}
-                           {{--</tr>`;--}}
-                {{--$("#lecturers-list").append(row);--}}
-            {{--});--}}
+
         });
     </script>
 @endsection
