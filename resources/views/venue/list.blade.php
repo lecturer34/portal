@@ -4,6 +4,16 @@
     <hr>
     <a href="{{route("venues.create")}}" class = "btn btn-primary">Create</a>
     <br><br>
+@if (session('success'))
+    <div class="alert alert-info col-4">
+        <i class="fa fa-check"></i> {{ session('success') }}
+    </div>
+@endif
+@if (session('error'))
+    <div class="alert alert-danger col-4">
+        <i class="fa fa-check"></i> {{ session('error') }}
+    </div>
+@endif
     <table class = "table table-bordered">
         <tr>
             <th>S/N</th>
