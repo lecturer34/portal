@@ -7,6 +7,8 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\Auth\loginController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\VenueController;
+use App\Http\Controllers\EmployeeController;
 
 Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::get('university', [SchoolController::class, 'index'])->name('university.schools');
@@ -29,3 +31,10 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/dropdown', function(){
     return view('dropdown');
 });
+
+Route::get('/venue', [VenueController::Class,'index'])->name('venue.list');
+Route::resource('venues', VenueController::class);
+
+Route::get('/employee', [EmployeeController::Class,'index'])->name('employee.list');
+Route::resource('employees', EmployeeController::class);
+
