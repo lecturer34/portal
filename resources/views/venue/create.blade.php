@@ -5,6 +5,20 @@
     <form method = "post" action="{{route('venues.store')}}" style="width: 500px">
         @csrf()
         <div class="mb-3">
+            <label for="school" class="form-label">School Name</label>
+            <select name="school_id" class="form-control" required>
+                @foreach($schools as $school)
+                    <option value="{{$school->id}}">{{$school->name}}</option>
+                @endforeach
+            </select>
+            @error("school_id")
+            <div class = "alert alert-danger">
+                {{ $errors->first('school_id') }}
+            </div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
             <label for="department" class="form-label">Department Name</label>
             <select name="department_id" class="form-control" required>
                 @foreach($departments as $department)
@@ -14,6 +28,16 @@
             @error("department_id")
             <div class = "alert alert-danger">
                 {{ $errors->first('department_id') }}
+            </div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" value="">
+            @error("name")
+            <div class = "alert alert-danger">
+                {{  $errors->first("name") }}
             </div>
             @enderror
         </div>

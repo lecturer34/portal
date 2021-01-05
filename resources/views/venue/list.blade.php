@@ -7,8 +7,9 @@
     <table class = "table table-bordered">
         <tr>
             <th>S/N</th>
-            <th>Faculty</th>
+            <th>School</th>
             <th>Department</th>
+            <th>Name</th>
             <th>Capacity</th>
             <th>Type</th>
             <th>Multimedia</th>
@@ -23,6 +24,7 @@
                     <a href="">{{ $venue->getschoolschool->name}}</a>
                 </td>
                 <td>{{ $venue->getdepartmentname->name }}</td>
+                <td>{{ $venue->name }}</td>
                 <td>{{ $venue->capacity }}</td>
                 <td>{{ $venue->type }}</td>
                 <td>{{ $venue->has_multimedia }}</td>
@@ -30,9 +32,10 @@
                 <td>
                     <a href="">Edit</a>
                     |
-                    <a href="">Delete</a>
+                    <a href="{{ route("venues.destroy", $venue->id)  }}">Delete</a>
                 </td>
             </tr>
-    </table>
+
     @endforeach
+    </table>
 @endsection()

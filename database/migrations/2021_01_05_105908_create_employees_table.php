@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVenuesTable extends Migration
+class CreateEmployeesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateVenuesTable extends Migration
      */
     public function up()
     {
-        Schema::create('venues', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->unsignedBigInteger('school_id');
-            $table->foreign('school_id')->references('id')->on('schools');
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments');
-            $table->string('capacity');
-            $table->enum('type',['hall','theater','lab'])->default('hall');
-            $table->enum('status',['usable','unusable'])->default('usable');
-            $table->enum('has_multimedia',['yes','no'])->default('yes');
+            $table->unsignedBigInteger('rank_id');
+            $table->foreign('rank_id')->references('id')->on('ranks');
+            $table->string('employee_no');
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('email');
+            $table->string('photourl');
             $table->timestamps();
         });
     }
@@ -34,6 +35,6 @@ class CreateVenuesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('venues');
+        Schema::dropIfExists('employees');
     }
 }
