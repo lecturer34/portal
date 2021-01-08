@@ -20,7 +20,7 @@ class CourseController extends Controller
 
     public function index(Department $department)
     {
-        $courses = Course::where('department_id', $department->id)->get();
+        $courses = Course::where('department_id', $department->id)->paginate(5);
         return view('department.courses', compact('courses', 'department'));
     }
 

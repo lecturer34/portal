@@ -3,6 +3,7 @@
     {{ Breadcrumbs::render('university') }}
     <hr>
     <a href="{{route("schools.create")}}" class = "btn btn-primary">Create</a>
+    https://www.whed.net/results_institutions.php
     <br><br>
     <table class = "table table-bordered">
         <tr>
