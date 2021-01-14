@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Schedule;
+use App\Models\Venue;
 use Illuminate\Http\Request;
 use App\Models\Group;
+use Carbon\Carbon;
 
 class ScheduleController extends Controller
 {
@@ -14,56 +16,44 @@ class ScheduleController extends Controller
         return view('group.schedules', compact('schedules', 'group'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        return view('schedule.create');
+        $schools = getSchools();
+        return view('schedule.create', compact('schools'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $stime = Carbon::createFromFormat("h:m a", $request->stime);
+        $etime = Carbon::createFromFormat("h:m a", $request->etime);
+        $group_id = session('group_id');
+
+        $schedule = Schedule::create([
+            "day"=>$request->day,
+            "stime"=>$stime->toTimeString(),
+            "etime"=>$etime->toTimeString(),
+            "venue_id"=>$request->venue,
+            "group_id"=>$group_id,
+        ]);
+
+        return redirect()->route('group.schedules', $group_id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Schedule  $schedule
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Schedule $schedule)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Schedule  $schedule
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Schedule $schedule)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Schedule  $schedule
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Schedule $schedule)
     {
         //

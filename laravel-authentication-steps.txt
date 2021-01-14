@@ -22,4 +22,6 @@ Laravel Authentication
 				
 Git Username: jolawal
 Git Email: ju3lawal@gmail.com
-Git Password: ozi123@abu		
+Git Password: ozi123@abu
+
+id = "{{$lecturer->id}}"		

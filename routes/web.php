@@ -14,7 +14,12 @@ use App\Http\Controllers\GroupLecturerController;
 use App\Http\Controllers\RankController;
 
 
-Route::get('/', [LoginController::class, 'showLoginForm']);
+//Route::get('/', [LoginController::class, 'showLoginForm']);
+
+Route::get('/', function(){
+    return view('welcome');
+});
+
 Route::get('university', [SchoolController::class, 'index'])->name('university.schools');
 Route::resource('schools', SchoolController::class);
 Route::get('school/{school}', [DepartmentController::class, 'index'])->name('school.departments');
@@ -39,14 +44,7 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('getdepartments/{school_id}', function($school_id){
-    return getDepartments($school_id);
-})->name('get.departments');
 
-
-Route::get('/dropdown', function(){
-    return view('dropdown');
-});
 
 Route::get('/venue', [VenueController::Class,'index'])->name('venue.list');
 Route::resource('venues', VenueController::class);
@@ -55,10 +53,20 @@ Route::get('/employee', [EmployeeController::Class,'index'])->name('employee.lis
 Route::resource('employees', EmployeeController::class);
 
 
+Route::get('getdepartments/{school_id}', function($school_id){
+    return getDepartments($school_id);
+})->name('get.departments');
+
 Route::get('getlecturers/{department_id}', function($department_id){
     return getLecturers($department_id);
 })->name('get.lecturers');
 
+
 Route::get('/rank', [RankController::Class,'index'])->name('rank.list');
 Route::resource('ranks', RankController::class);
+
+Route::get('getvenues/{department_id}', function($department_id){
+    return getVenues($department_id);
+})->name('get.venues');
+
 

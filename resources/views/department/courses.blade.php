@@ -34,4 +34,7 @@
             </tr>
         @endforeach
     </table>
+    <div class="d-flex justify-content-center">
+        {!! $courses->links() !!}
+    </div>
 @endsection

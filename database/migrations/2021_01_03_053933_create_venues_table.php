@@ -15,16 +15,14 @@ class CreateVenuesTable extends Migration
     {
         Schema::create('venues', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->unsignedBigInteger('school_id');
-            $table->foreign('school_id')->references('id')->on('schools');
-            $table->unsignedBigInteger('department_id');
-            $table->foreign('department_id')->references('id')->on('departments');
             $table->string('name');
-            $table->string('capacity');
-            $table->enum('type',['hall','theater','lab'])->default('hall');
-            $table->enum('status',['usable','unusable'])->default('usable');
-            $table->enum('has_multimedia',['yes','no'])->default('yes');
+            $table->integer('capacity');
+            $table->enum('type',['hall','theater','lab']);
+            $table->enum('status',['good','bad']);
+            $table->enum('has_multimedia',['yes','no']);
+            $table->unsignedBigInteger('department_id');
             $table->timestamps();
+            $table->foreign('department_id')->references('id')->on('departments');
         });
     }
 
