@@ -11,6 +11,7 @@ use App\Http\Controllers\VenueController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\GroupLecturerController;
+use App\Http\Controllers\RankController;
 
 
 Route::get('/', [LoginController::class, 'showLoginForm']);
@@ -57,4 +58,7 @@ Route::resource('employees', EmployeeController::class);
 Route::get('getlecturers/{department_id}', function($department_id){
     return getLecturers($department_id);
 })->name('get.lecturers');
+
+Route::get('/rank', [RankController::Class,'index'])->name('rank.list');
+Route::resource('ranks', RankController::class);
 

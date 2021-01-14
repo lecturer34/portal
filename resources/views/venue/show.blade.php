@@ -31,7 +31,7 @@
     </dl>
 
     <div class="d-flex">
-
+        <a href="{{route('venues.edit', $venue->id)}}" class="btn btn-primary m-1">Edit</a>
 
         <form action="{{ route('venues.destroy', $venue->id) }}" method="POST">
             {{ method_field('DELETE') }}

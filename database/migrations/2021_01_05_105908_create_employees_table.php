@@ -23,7 +23,7 @@ class CreateEmployeesTable extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email');
-            $table->string('photourl');
+            $table->string('photourl')->nullable();
             $table->timestamps();
         });
     }

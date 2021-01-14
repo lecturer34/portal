@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <script src = "{{asset('js/bootstrap.bundle.min.js')}}"></script>
     <script src = "{{asset('js/jquery-3.5.1.min.js')}}"></script>
+    @include('commons.styles')
+    @yield('css')
 </head>
 <body>
 @include("layouts.navbar");
@@ -15,5 +17,8 @@
     @yield('content')
 
 </main>
+@include('commons.scripts')
+@yield('js')
+<!-- End js -->
 </body>
 </html>

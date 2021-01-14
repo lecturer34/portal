@@ -14,7 +14,8 @@
         <i class="fa fa-check"></i> {{ session('error') }}
     </div>
 @endif
-    <table class = "table table-bordered">
+    <table class = "table table-bordered table-striped" id="venue_table">
+        <thead>
         <tr>
             <th>S/N</th>
             <th>School</th>
@@ -26,8 +27,9 @@
             <th>Status</th>
             <th>Manage</th>
         </tr>
-
+        </thead>
         @foreach($venues as $venue )
+            <tbody>
             <tr>
                 <td>{{ $loop->index + 1  }}</td>
                 <td>
@@ -40,12 +42,20 @@
                 <td>{{ $venue->has_multimedia }}</td>
                 <td>{{ $venue->status }}</td>
                 <td>
-                    <a href="">Edit</a>
+                    <a  href="{{ route("venues.edit", $venue->id)  }}">Edit</a>
                     |
                     <a href="{{ route("venues.destroy", $venue->id)  }}">Delete</a>
                 </td>
             </tr>
-
+            </tbody>
     @endforeach
     </table>
+
+
 @endsection()
+@section('js')
+    <script>
+         $('#venue_table').dataTable();
+        // $("#date").datepicker({format: 'yyyy-mm-dd'});
+    </script>
+@endsection

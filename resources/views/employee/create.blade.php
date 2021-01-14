@@ -30,6 +30,20 @@
         </div>
 
         <div class="mb-3">
+            <label for="rank" class="form-label">Rank</label>
+            <select name="rank_id" class="form-control" required>
+                @foreach($ranks as $rank)
+                    <option value="{{$rank->id}}">{{$rank->name}}</option>
+                @endforeach
+            </select>
+            @error("rank_id")
+            <div class = "alert alert-danger">
+                {{ $errors->first('rank_id') }}
+            </div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
             <label for="firstname" class="form-label">FirstName</label>
             <input type="text" name="firstname" class="form-control" value="" required>
             @error("firstname")
@@ -58,6 +72,17 @@
             </div>
             @enderror
         </div>
+
+        <div class="mb-3">
+            <label for="photourl" class="form-label">Upload photo</label>
+            <input type="file" name="photourl" class="form-control-file" value="" >
+          {{--  @error("photourl")
+            <div class = "alert alert-danger">
+                {{  $errors->first("photourl") }}
+            </div>
+            @enderror--}}
+        </div>
+
 
         <div class="mb-3">
             <button type = "submit" class = "btn btn-primary">Save</button>

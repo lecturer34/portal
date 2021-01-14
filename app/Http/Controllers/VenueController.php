@@ -57,16 +57,37 @@ class VenueController extends Controller
         return redirect()->route('venue.list')->with(compact('schools', 'departments'));
     }
 
+    public function edit(Venue $venue)
+    {
+        $schools = School::all();
+        $departments = Department::all();
+        return view('venue.edit', compact('venue','schools', 'departments'));
+    }
+
+    public function update(Request $request, Venue $venue){
+        $this->validate_($request);
+            $venue->school_id = $request->school_id;
+            $venue->department_id = $request->department_id;
+            $venue->name = $request->name;
+            $venue->capacity = $request->capacity;
+            $venue->type = $request->type;
+            $venue->status = $request->status;
+            $venue->has_multimedia = $request->has_multimedia;
+            $venue->save();
+        $schools = School::all();
+        $departments = Department::all();
+        return redirect()->route('venue.list')->with(compact('schools', 'departments'));
+    }
+
     public function show(Venue $venue)
     {
         return view('venue.show', compact('venue'));
     }
 
-    public function destroy(Venue $id)
+    public function destroy(Venue $venue)
     {
-
-        if ($id->checkDelete()) {
-            $id->delete();
+        if ($venue->checkDelete()) {
+            $venue->delete();
             session()->flash('success', 'Venue was deleted successfully!');
         } else {
             session()->flash('error', 'Venue cannot be deleted');
@@ -74,6 +95,7 @@ class VenueController extends Controller
         $schools = School::all();
         $departments = Department::all();
         return redirect()->route('venue.list')->with(compact('schools', 'departments'));
+
     }
 
 }
